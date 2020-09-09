@@ -1,0 +1,59 @@
+<!-- ============================================================== -->
+<!-- login page  -->
+<!-- ============================================================== -->
+<div class="contenedor-login-register">
+  <div class="splash-container animate__animated animate__fadeInLeft">
+    <div class="card">
+      <div class="card-header text-center">
+        <h2>Iniciar Session</h2>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="forma" (ngSubmit)="login()">
+          <div class="form-group">
+            <input
+              class="form-control form-control-lg"
+              id="username"
+              type="text"
+              placeholder="Username"
+              autocomplete="off"
+              formControlName="username"
+              [class.is-invalid]="validateForm('username')"
+            />
+            <span class="invalid-feedback">El usuario es necesario</span>
+          </div>
+          <div class="form-group">
+            <input
+              class="form-control form-control-lg"
+              id="password"
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+              [class.is-invalid]="validateForm('password')"
+            />
+            <span class="invalid-feedback">El usuario es necesario</span>
+          </div>
+          <button
+            [disabled]="loading"
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
+          >
+            <span *ngIf="!loading"> Iniciar Session </span>
+            <i *ngIf="loading" class="fas fa-sync fa-spin fa-refresh fa-2x"></i>
+          </button>
+        </form>
+      </div>
+      <!-- <div class="card-footer bg-white p-0">
+        <div class="card-footer-item card-footer-item-bordered">
+          <a routerLink="/register" class="footer-link">Create An Account</a>
+        </div>
+        <div class="card-footer-item card-footer-item-bordered">
+          <a href="#" class="footer-link">Forgot Password</a>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- end login page  -->
+<!-- ============================================================== -->

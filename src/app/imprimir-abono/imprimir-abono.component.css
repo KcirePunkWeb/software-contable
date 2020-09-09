@@ -1,0 +1,25 @@
+* {
+  color: #000;
+}
+
+body {
+  font-size: 18px;
+}
+
+.border {
+  border-color: #000 !important;
+  padding: 5px;
+}
+
+.padding {
+  padding: 10px 5px;
+}
+
+.fn {
+  font-weight: normal !important;
+}
+
+.prueba {
+  margin-top: 10px;
+  font-size: 14px;
+}

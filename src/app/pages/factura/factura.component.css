@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #000 !important;
+}
+
+.contenedor {
+  /* width: 90%; */
+  max-width: cal(100vw - 20px);
+  padding: 25px 60px;
+  background-color: #fff;
+  border: 1px solid #000;
+  height: 1442px;
+  margin: auto;
+  position: relative;
+}
+
+.contenedor-factura {
+  width: 100%;
+}
+
+.border-factura {
+  border: 2px solid #000;
+}
+
+.border-factura-derecha {
+  border-right: 2px solid #000;
+}
+
+.factura-content .border-factura-derecha > p {
+  color: #000;
+}
+
+.factura_footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 10px solid #000;
+}
+
+.factura_footer h5 {
+  display: inline-block;
+}
+
+.footer-title {
+  width: 30%;
+}
+
+.footer-tabla {
+  width: 30%;
+}
+
+.factura-footer-content {
+  display: flex;
+  justify-content: space-around;
+}

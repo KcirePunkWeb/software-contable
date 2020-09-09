@@ -1,0 +1,153 @@
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <h2 *ngIf="id" class="pageheader-title">Actualizar Local</h2>
+          <h2 *ngIf="!id" class="pageheader-title">Registrar Un Local</h2>
+          <hr />
+
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <h5 class="card-header">Informacion Del Local</h5>
+                <div class="card-body">
+                  <div *ngIf="error" class="alert alert-danger" role="alert">
+                    No se encontro ningun local
+                  </div>
+                  <form
+                    *ngIf="!error"
+                    autocomplete="off"
+                    [formGroup]="forma"
+                    (ngSubmit)="!id ? save() : update()"
+                  >
+                    <div class="form-group">
+                      <label for="name" class="col-form-label"
+                        >Nombre Del Local</label
+                      >
+                      <input
+                        id="name"
+                        formControlName="name"
+                        type="text"
+                        class="form-control"
+                        [class.is-invalid]="getValidadeFormName('name')"
+                      />
+                      <span class="invalid-feedback">
+                        El nombre es obligatorio*
+                      </span>
+                    </div>
+                    <div class="form-group">
+                      <label for="location">Direccion del local</label>
+                      <input
+                        id="location"
+                        formControlName="location"
+                        type="text"
+                        class="form-control"
+                        [class.is-invalid]="getValidadeFormName('location')"
+                      />
+                      <span class="invalid-feedback">
+                        La direccion es obligatorio*
+                      </span>
+                    </div>
+                    <div class="form-group">
+                      <label for="price" class="col-form-label"
+                        >Precio del local</label
+                      >
+                      <input
+                        id="phone_number"
+                        type="number"
+                        class="form-control"
+                        formControlName="price"
+                        [class.is-invalid]="getValidadeFormName('price')"
+                      />
+                      <span class="invalid-feedback">
+                        El precio es obligatorio*
+                      </span>
+                      <span class="mt-1">
+                        <strong>
+                          {{
+                            forma.get("price").value
+                              | currency: "COP":"symbol-narrow":".0-0"
+                          }}
+                        </strong>
+                      </span>
+                    </div>
+                    <div class="form-group">
+                      <label for="vat">IVA</label>
+                      <select
+                        id="vat"
+                        formControlName="vat"
+                        class="form-control"
+                        [class.is-invalid]="getValidadeFormName('vat')"
+                      >
+                        <option value="0">0</option>
+                        <option value="19">19</option>
+                      </select>
+                      <span class="invalid-feedback">
+                        El IVA es obligatoria*
+                      </span>
+                    </div>
+                    <div *ngIf="id" class="form-group">
+                      <label for="client">Cliente</label>
+                      <select
+                        id="client"
+                        formControlName="client"
+                        class="form-control form-control-sm"
+                      >
+                        <option
+                          *ngFor="let client of clienteSimple"
+                          [value]="client.id"
+                        >
+                          {{ client.name }} {{ client.last_name }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="observation">Observaciones</label>
+                      <textarea
+                        id="observation"
+                        type="text"
+                        style="max-height: 180px;"
+                        formControlName="observation"
+                        class="form-control"
+                        [class.is-invalid]="getValidadeFormName('observation')"
+                      >
+                      </textarea>
+                      <span class="invalid-feedback">
+                        La obersacion es obligatoria
+                      </span>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 pl-0 text-right">
+                        <button
+                          *ngIf="!id"
+                          type="submit"
+                          class="btn btn-space btn-primary"
+                        >
+                          Guardar Local <i class="far fa-building"></i>
+                        </button>
+                        <button
+                          *ngIf="id"
+                          type="submit"
+                          class="btn btn-space btn-success"
+                        >
+                          Actualizar Cliente <i class="far fa-building"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

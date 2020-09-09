@@ -1,0 +1,174 @@
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <h2>Generar Factura</h2>
+          <hr />
+
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <h5 class="card-header">Informacion Del Cliente</h5>
+                <div class="card-body">
+                  <!-- <form #formClient autocomplete="off" [formGroup]="forma">
+                    <div class="form-group">
+                      <label for="name" class="col-form-label">Nombre</label>
+                      <input
+                        id="name"
+                        formControlName="name"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="nit_number">NIT</label>
+                      <input
+                        id="nit_number"
+                        formControlName="nit_number"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="phone_number" class="col-form-label"
+                        >Telefono</label
+                      >
+                      <input
+                        id="phone_number"
+                        type="number"
+                        class="form-control"
+                        formControlName="phone_number"
+                        placeholder="+57 3003243242"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="city">Ciudad</label>
+                      <input
+                        id="city"
+                        type="text"
+                        formControlName="city"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="address">Dirrecion</label>
+                      <input
+                        id="address"
+                        type="text"
+                        placeholder="Cartagena calle 30 #40-b43"
+                        formControlName="address"
+                        class="form-control"
+                      />
+                    </div>
+                  </form> -->
+                  <form #formClient autocomplete="off" [formGroup]="forma">
+                    <div class="form-group row">
+                      <div class="col-12 col-md-6">
+                        <label for="name" class="col-form-label">Nombre</label>
+                        <input
+                          id="name"
+                          formControlName="name"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label for="last_name" class="col-form-label"
+                          >Apellidos</label
+                        >
+                        <input
+                          id="last_name"
+                          formControlName="last_name"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="enterprise_name"
+                        >Nombre De La Empresa
+                        <span class="text-secondary">(Opcional)</span></label
+                      >
+                      <input
+                        id="enterprise_name"
+                        type="text"
+                        formControlName="enterprise_name"
+                        class="form-control"
+                      />
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-12 col-md-6">
+                        <label for="document_type">Tipo De Documento</label>
+                        <select
+                          id="document_type"
+                          formControlName="document_type"
+                          class="form-control form-control-sm"
+                        >
+                          <option value="nit">NIT</option>
+                          <option value="c.c">C.C</option>
+                        </select>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label for="document_number"
+                          >Numero De Documento o NIT</label
+                        >
+                        <input
+                          type="number"
+                          id="document_number"
+                          formControlName="document_number"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-12 col-md-6">
+                        <label for="phone_number" class="col-form-label"
+                          >Telefono</label
+                        >
+                        <input
+                          id="phone_number"
+                          type="number"
+                          class="form-control"
+                          formControlName="phone_number"
+                          placeholder="+57 3003243242"
+                        />
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label for="city" class="col-form-label">Ciudad</label>
+                        <input
+                          id="city"
+                          formControlName="city"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="direction">Dirrecion</label>
+                      <input
+                        id="direction"
+                        type="text"
+                        placeholder="Cartagena calle 30 #40-b43"
+                        formControlName="direction"
+                        class="form-control"
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

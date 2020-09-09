@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <h5 class="card-header">Nombre del cliente para abonar</h5>
+      <div class="card-body">
+        <div class="form-group">
+          <input
+            type="text"
+            [formControl]="nombre"
+            readonly
+            class="form-control"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <h2 class="pageheader-title">Abonos</h2>
+
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <h5 class="card-header">
+                  Crear Abono
+                </h5>
+
+                <div class="card-body">
+                  <!-- <div *ngIf="error" class="alert alert-danger" role="alert">
+                    No se encontro ningun local
+                  </div> -->
+                  <form
+                    autocomplete="off"
+                    [formGroup]="forma"
+                    (ngSubmit)="guardarAbono()"
+                  >
+                    <div class="form-group">
+                      <label for="facture" class="col-form-label"
+                        >ID De Factura</label
+                      >
+                      <input
+                        id="facture"
+                        formControlName="facture"
+                        type="text"
+                        class="form-control"
+                        readonly
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="total_to_pay" class="col-form-label"
+                        >Cantidad para abonar</label
+                      >
+                      <input
+                        id="total_to_pay"
+                        formControlName="total_to_pay"
+                        type="number"
+                        class="form-control"
+                        [class.is-invalid]="getTotalToPay"
+                      />
+                      <span class="invalid-feedback">
+                        El abono es obligatorio*
+                      </span>
+                      <span class="mt-1">
+                        <strong>
+                          {{
+                            forma.get("total_to_pay").value
+                              | currency: "COP":"symbol-narrow":".0-0"
+                          }}
+                        </strong>
+                      </span>
+                    </div>
+
+                    <!-- <div class="form-group">
+                      <label for="facture_date">Fecha de vencimiento</label>
+                      <input
+                        type="date"
+                        formControlName="facture_date"
+                        class="form-control"
+                        [class.is-invalid]="getDateFacture"
+                      />
+                      <span class="invalid-feedback">
+                        La fecha es obligatoria*
+                      </span>
+                    </div> -->
+
+                    <div class="row">
+                      <div class="col-6">
+                        <h2>
+                          Total Abonado:
+                          {{
+                            total_paid | currency: "COP":"symbol-narrow":".0-0"
+                          }}
+                        </h2>
+
+                        <h2>
+                          Pago Total:
+                          {{
+                            total_to_pay
+                              | currency: "COP":"symbol-narrow":".0-0"
+                          }}
+                        </h2>
+
+                        <h2 style="color: green;">
+                          Pago Restando:
+                          {{
+                            total_to_pay - total_paid
+                              | currency: "COP":"symbol-narrow":".0-0"
+                          }}
+                        </h2>
+                      </div>
+                      <div class="col-6 pl-0 text-right">
+                        <button
+                          [disabled]="forma.invalid"
+                          type="submit"
+                          class="btn btn-space btn-primary"
+                        >
+                          Guardar Abono <i class="far fa-building"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

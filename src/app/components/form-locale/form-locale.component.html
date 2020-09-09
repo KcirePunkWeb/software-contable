@@ -1,0 +1,87 @@
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <h5 class="card-header">Informacion Del Local</h5>
+                <div class="card-body">
+                  <form autocomplete="off" [formGroup]="forma">
+                    <div class="form-group">
+                      <label for="name" class="col-form-label"
+                        >Nombre Del Local</label
+                      >
+                      <input
+                        id="name"
+                        formControlName="name"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="location">Direccion del local</label>
+                      <input
+                        id="location"
+                        formControlName="location"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="price" class="col-form-label"
+                        >Precio del local</label
+                      >
+                      <input
+                        id="phone_number"
+                        type="number"
+                        class="form-control"
+                        formControlName="price"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="vat">IVA</label>
+                      <input
+                        id="vat"
+                        type="text"
+                        placeholder="0-19"
+                        formControlName="vat"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="client_name">Cliente</label>
+                      <input
+                        id="client_name"
+                        type="text"
+                        formControlName="client"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="observation">Observaciones</label>
+                      <textarea
+                        id="observation"
+                        type="text"
+                        style="max-height: 180px;"
+                        formControlName="observation"
+                        class="form-control"
+                      >
+                      </textarea>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

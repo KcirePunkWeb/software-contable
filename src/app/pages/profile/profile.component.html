@@ -1,0 +1,67 @@
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <h2 class="pageheader-title">Ajuste De Cuenta</h2>
+
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5>Cambiar usuario y/o contraseña</h5>
+                <p>Nota: Recuerde que si solo va a cambiar el nombre de usuario la contraseña se puede dejar vacia, y si solo va a cambiar la contraseña puede dejar el nombre de usuario vacio</p>
+
+                <h4>RECUERDE CUANDO LE DES EN GUARDAR LA PAGINA CERRARA SESION Y TIENE QUE INGRESAR NUEVAMENTE</h4>
+                </div>
+                <div class="card-body">
+                  <!-- <div *ngIf="error" class="alert alert-danger" role="alert">
+                    No se encontro ningun local
+                  </div> -->
+                  <form
+                    autocomplete="off"
+                    [formGroup]="forma"
+                    (ngSubmit)="guardar()"
+                  >
+                    <div class="form-group">
+                      <label for="username" class="col-form-label"
+                        >Nombre de usuario</label
+                      >
+                      <input
+                        id="username"
+                        formControlName="username"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="col-form-label"
+                        >Contraseña</label
+                      >
+                      <input
+                        id="password"
+                        formControlName="password"
+                        type="password"
+                        class="form-control"
+                      />
+                    </div>
+
+                    <button [disabled]="loading" class="btn btn-primary btn-block">
+                      Guardar
+                      <i *ngIf="loading" class="fas fa-sync fa-spin fa-refresh fa-2x"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

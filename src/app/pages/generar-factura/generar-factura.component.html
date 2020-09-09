@@ -1,0 +1,233 @@
+<app-form-client *ngFor="let c of client" [client]="c"></app-form-client>
+<app-form-locale *ngFor="let l of local" [local]="l"></app-form-locale>
+
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <h2>Precio de los servicios</h2>
+          <hr />
+
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <h5 class="card-header">Informacion Del Cliente</h5>
+                <div class="card-body">
+                  <form
+                    #formClient
+                    autocomplete="off"
+                    [formGroup]="forma"
+                    (ngSubmit)="calcular()"
+                  >
+                    <div class="form-group">
+                      <label for="facture_date">Fecha de vencimiento</label>
+                      <input
+                        type="date"
+                        formControlName="facture_date"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-12 col-md-6">
+                        <label for="administration_price"
+                          >Cuota Administrativa</label
+                        >
+                        <input
+                          type="number"
+                          formControlName="administration_price"
+                          class="form-control"
+                          [class.is-invalid]="
+                            getValidadeFormName('administration_price')
+                          "
+                        />
+                        <span>
+                          {{
+                            getServicioCOP("administration_price")
+                              | currency: "COP":"symbol-narrow":".0-0"
+                          }}
+                        </span>
+                        <span class="invalid-feedback">
+                          Este campo es obligatorio*
+                        </span>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label for="administration_vat"
+                          >IVA - Administracion</label
+                        >
+                        <select
+                          id="administration_vat"
+                          formControlName="administration_vat"
+                          class="form-control"
+                          [class.is-invalid]="
+                            getValidadeFormName('administration_vat')
+                          "
+                        >
+                          <option value="0">0</option>
+                          <option value="19">19</option>
+                        </select>
+                        <span class="invalid-feedback">
+                          Este campo es obligatorio*
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-12 col-md-6">
+                        <label for="water_service_price"
+                          >Servicio Del Agua</label
+                        >
+                        <input
+                          type="number"
+                          formControlName="water_service_price"
+                          class="form-control"
+                          [class.is-invalid]="
+                            getValidadeFormName('water_service_price')
+                          "
+                        />
+                        <span>
+                          {{
+                            getServicioCOP("water_service_price")
+                              | currency: "COP":"symbol-narrow":".0-0"
+                          }}
+                        </span>
+                        <span class="invalid-feedback">
+                          Este campo es obligatorio*
+                        </span>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label for="water_service_vat"
+                          >IVA - Cuota de agua</label
+                        >
+                        <select
+                          id="water_service_vat"
+                          formControlName="water_service_vat"
+                          class="form-control"
+                          [class.is-invalid]="
+                            getValidadeFormName('water_service_vat')
+                          "
+                        >
+                          <option value="0">0</option>
+                          <option value="19">19</option>
+                        </select>
+                        <span class="invalid-feedback">
+                          Este campo es obligatorio*
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-12 col-md-6">
+                        <label for="energy_service_price"
+                          >Servicio De Electricidad</label
+                        >
+                        <input
+                          type="number"
+                          formControlName="energy_service_price"
+                          class="form-control"
+                          [class.is-invalid]="
+                            getValidadeFormName('energy_service_price')
+                          "
+                        />
+                        <span>
+                          {{
+                            getServicioCOP("energy_service_price")
+                              | currency: "COP":"symbol-narrow":".0-0"
+                          }}
+                        </span>
+                        <span class="invalid-feedback">
+                          Este campo es obligatorio*
+                        </span>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <!-- energy_service_vat -->
+                        <label for="energy_service_vat"
+                          >IVA - Cuota De Electricidad</label
+                        >
+                        <select
+                          id="energy_service_vat"
+                          formControlName="energy_service_vat"
+                          class="form-control"
+                          [class.is-invalid]="
+                            getValidadeFormName('energy_service_vat')
+                          "
+                        >
+                          <option value="0">0</option>
+                          <option value="19">19</option>
+                        </select>
+                        <span class="invalid-feedback">
+                          Este campo es obligatorio*
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-12 col-md-6">
+                        <label for="energy_service_vat">Metodo De Pago</label>
+                        <select
+                          formControlName="way_to_pay"
+                          class="form-control"
+                        >
+                          <option value="credito">Credito</option>
+                          <option value="efectivo">Efectivo</option>
+                        </select>
+                      </div>
+                    </div>
+                    <button
+                      [disabled]="!forma.valid"
+                      type="submit"
+                      class="btn btn-outline-primary"
+                    >
+                      Calcular Precio Arriendo
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+          <div class="row" *ngIf="totalEscrito">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="form-group">
+                    <h2>
+                      Total:
+                      {{ total | currency: "COP":"symbol-narrow":".0-0" }}
+                    </h2>
+
+                    <p>
+                      Verificar si esta bien escrito el total en letras
+                    </p>
+                    <textarea
+                      [formControl]="price_humanized"
+                      class="form-control"
+                      [class.is-invalid]="
+                        price_humanized.invalid &&
+                        (price_humanized.dirty || price_humanized.touched)
+                      "
+                    >
+                    </textarea>
+                    <span class="invalid-feedback">
+                      Este campo es obligatorio*
+                    </span>
+
+                    <button
+                      type="button"
+                      (click)="generarFactura()"
+                      class="btn btn-block btn-primary mt-3"
+                    >
+                      Generar Factura
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

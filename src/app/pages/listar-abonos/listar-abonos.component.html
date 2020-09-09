@@ -1,0 +1,169 @@
+<!-- ============================================================== -->
+<!-- pageheader -->
+<!-- ============================================================== -->
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="page-header">
+      <h2 class="pageheader-title">Listado De Abonos</h2>
+      <div id="custom-search" class="top-search-bar">
+        <input
+          [formControl]="searchAbono"
+          class="form-control"
+          type="text"
+          placeholder="Busqueda de abonos"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader -->
+<!-- ============================================================== -->
+<div class="row animate__animated animate__fadeIn">
+  <!-- ============================================================== -->
+  <!-- basic table  -->
+  <!-- ============================================================== -->
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <button
+        style="position: absolute; right: 0;"
+        class="btn btn-warning text-white ml-auto"
+        (click)="restoreAbono()"
+      >
+        Restaurar Abono
+      </button>
+      <h5 class="card-header">Informacion del cliente ({{ totalPage }})</h5>
+      <div class="card-body">
+        <div
+          *ngIf="abonos.length === 0"
+          class="alert alert-primary"
+          role="alert"
+        >
+          No se encuentra registro de cliente en esta pagina.
+          <a routerLink="/contable/abonos">Regresar a la pagina principal</a>
+        </div>
+        <div *ngIf="cargando" class="row animated fadeIn fast">
+          <div class="col-12">
+            <div class="alert alert-info text-center" role="alert">
+              <h4 class="alert-heading">Cargando</h4>
+              <i class="fas fa-sync fa-spin fa-refresh fa-2x"></i>
+              <p>Por favor espere</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!cargando" class="table-responsive">
+          <table class="table table-striped table-bordered first">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>No. De Factura</th>
+                <th>Cliente</th>
+                <th>Abonar</th>
+                <th>Fecha de abono</th>
+                <th>Pagos</th>
+                <th>Ver Abonos</th>
+                <th>Ajustes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let abono of abonos">
+                <td>{{ abono.id }}</td>
+                <td>{{ abono?.facture?.facture_number }}</td>
+                <td>
+                  {{ abono?.facture.client_name }}
+                  {{ abono?.facture.client_last_name }}
+                </td>
+                <td>
+                  {{
+                    abono.total_to_pay | currency: "COP":"symbol-narrow":".0-0"
+                  }}
+                </td>
+                <td>
+                  {{ abono.created_at | amLocale: "es" | amDateFormat: "LL" }}
+                </td>
+
+                <td>
+                  <button
+                    [disabled]="abono.payment_date !== null ? true : false"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Marca Como Pagado"
+                    class="btn"
+                    (click)="pagarAbono(abono.id)"
+                    [ngClass]="
+                      abono.payment_date !== null ? 'btn-success' : 'btn-danger'
+                    "
+                  >
+                    {{ abono.payment_date !== null ? "Pagado" : "No Pagado" }}
+                  </button>
+                </td>
+                <th>
+                  <a
+                    [routerLink]="['/imprimir-abono', abono.id]"
+                    class="btn btn-block btn-sm btn-info mr-2 mb-sm-0 mb-2 text-white"
+                  >
+                    <i class="fas fa-file-alt"></i
+                  ></a>
+                </th>
+                <td>
+                  <button
+                    (click)="eliminarAbono(abono.id)"
+                    class="btn btn-sm btn-danger"
+                  >
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <nav class="mt-4" aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <button
+                [disabled]="
+                  abonos.length === 0 || (totalPage === 1 && pageSearch === 1)
+                "
+                class="page-link cursor"
+                (click)="cambioPagina(-1)"
+              >
+                Anterior
+              </button>
+            </li>
+            <li
+              class="page-item"
+              routerLinkActive="active"
+              *ngFor="let contado of contador; let i = index"
+            >
+              <a
+                *ngIf="existsSearch === false"
+                class="page-link"
+                [routerLink]="['/contable/abonos']"
+                [queryParams]="{ q: contado }"
+                >{{ contado }}</a
+              >
+            </li>
+            <li class="page-item">
+              <button
+                [disabled]="
+                  nextDisabled || abonos.length === 0 || nextDisabledSearch
+                "
+                class="page-link cursor"
+                (click)="cambioPagina(1)"
+              >
+                Siguiente
+              </button>
+            </li>
+          </ul>
+        </nav>
+        <p *ngIf="existsSearch">
+          Pagina: {{ pageSearch }} - {{ contador.length }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- end basic table  -->
+  <!-- ============================================================== -->
+</div>

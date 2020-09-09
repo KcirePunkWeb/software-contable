@@ -1,0 +1,72 @@
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Rango Actual De las facturas</h3>
+          </div>
+          <div class="card-body">
+            <h3>{{ range || "No tienes definido rango de factura" }}</h3>
+          </div>
+          <div class="card-footer">
+            <h3 class="card-title">
+              Ultimo numero registrado: {{ lastRange }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <h2 class="pageheader-title">Informacion De Factura</h2>
+          <hr />
+
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <h5 class="card-header">Definir Rango De Factura</h5>
+                <div class="card-body">
+                  <form [formGroup]="rangeForm" (ngSubmit)="guardar()">
+                    <div class="form-group">
+                      <label for="start">No. Comienza</label>
+                      <input
+                        type="number"
+                        formControlName="start"
+                        id="start"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="end">No. Termina</label>
+                      <input
+                        type="number"
+                        formControlName="end"
+                        id="end"
+                        class="form-control"
+                      />
+                    </div>
+
+                    <button
+                      [disabled]="rangeForm.invalid"
+                      type="submit"
+                      class="btn btn-block btn-primary"
+                    >
+                      Guardar
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,168 @@
+<!-- ============================================================== -->
+<!-- pageheader -->
+<!-- ============================================================== -->
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="page-header">
+      <h2 class="pageheader-title">Listado De Locales</h2>
+      <div id="custom-search" class="top-search-bar">
+        <input
+          [formControl]="searchLocales"
+          class="form-control"
+          type="text"
+          placeholder="Buscar Locales..."
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader -->
+<!-- ============================================================== -->
+<div class="row animate__animated animate__fadeIn">
+  <!-- ============================================================== -->
+  <!-- basic table  -->
+  <!-- ============================================================== -->
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <button
+        style="position: absolute; right: 0;"
+        class="btn btn-warning text-white ml-auto"
+        (click)="restoreLocal()"
+      >
+        Restaurar Local
+      </button>
+      <h5 class="card-header">Informacion de Locales ({{ locales.length }})</h5>
+      <div class="card-body">
+        <div
+          *ngIf="locales.length === 0"
+          class="alert alert-primary"
+          role="alert"
+        >
+          No se encontraron locales con la busqueda.
+          <a routerLink="/contable/locales">Regresar a la pagina principal</a>
+        </div>
+        <div *ngIf="cargando" class="row animated fadeIn fast">
+          <div class="col-12">
+            <div class="alert alert-info text-center" role="alert">
+              <h4 class="alert-heading">Cargando</h4>
+              <i class="fas fa-sync fa-spin fa-refresh fa-2x"></i>
+              <p>Por favor espere</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!cargando" class="table-responsive">
+          <table class="table table-striped table-bordered first">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Precio</th>
+                <th>IVA</th>
+                <th>Observaciones</th>
+                <th>Ajustes</th>
+                <th>Generar Factura</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let locale of locales; trackBy: trackByFn">
+                <td>{{ locale.id }}</td>
+                <td>
+                  {{
+                    locale?.client?.active === true
+                      ? locale?.client?.name
+                      : "Sin cliente"
+                  }}
+
+                  {{
+                    locale?.client?.active === true
+                      ? locale?.client?.last_name
+                      : ""
+                  }}
+                </td>
+                <td>{{ locale.name }}</td>
+                <td>{{ locale.location }}</td>
+                <td>
+                  {{ locale.price | currency: "COP":"symbol-narrow":".0-0" }}
+                </td>
+                <td>{{ locale.vat }}</td>
+                <td>{{ locale.observation }}</td>
+                <td>
+                  <a
+                    [routerLink]="['/contable/update-local', locale.id]"
+                    class="btn btn-sm btn-info mr-2 mb-sm-0 mb-2 text-white"
+                    ><i class="fas fa-edit"></i
+                  ></a>
+
+                  <button
+                    (click)="deleteLocal(locale.id, locale.name)"
+                    class="btn btn-sm btn-danger"
+                  >
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+                <td>
+                  <button
+                    [disabled]="locale?.client?.active === true ? false : true"
+                    [routerLink]="['/contable/generar-factura', locale.id]"
+                    class="btn btn-primary"
+                  >
+                    Generar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <nav class="mt-4" aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <button
+                [disabled]="
+                  locales.length === 0 || (page === 1 && pageSearch === 1)
+                "
+                class="page-link cursor"
+                (click)="cambioPagina(-1)"
+              >
+                Anterior
+              </button>
+            </li>
+            <li
+              class="page-item"
+              routerLinkActive="active"
+              *ngFor="let contado of contador; let i = index"
+            >
+              <a
+                *ngIf="!existsSearch"
+                class="page-link"
+                [routerLink]="['/contable/locales']"
+                [queryParams]="{ q: contado }"
+                >{{ contado }}</a
+              >
+            </li>
+            <li class="page-item">
+              <button
+                [disabled]="
+                  nextDisabled || locales.length === 0 || nextDisabledSearch
+                "
+                class="page-link cursor"
+                (click)="cambioPagina(1)"
+              >
+                Siguiente
+              </button>
+            </li>
+          </ul>
+        </nav>
+        <p *ngIf="existsSearch">
+          Pagina: {{ pageSearch }} - {{ contador.length }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- end basic table  -->
+  <!-- ============================================================== -->
+</div>

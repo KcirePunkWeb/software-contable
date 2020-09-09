@@ -1,0 +1,187 @@
+<!-- ============================================================== -->
+<!-- pageheader -->
+<!-- ============================================================== -->
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="page-header">
+      <h2 class="pageheader-title">Listado De Facturas</h2>
+      <div id="custom-search" class="top-search-bar">
+        <input
+          [formControl]="searchFactura"
+          class="form-control"
+          type="text"
+          placeholder="Buscar Facturas..."
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader -->
+<!-- ============================================================== -->
+<div class="row animate__animated animate__fadeIn">
+  <!-- ============================================================== -->
+  <!-- basic table  -->
+  <!-- ============================================================== -->
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <button
+        style="position: absolute; right: 0;"
+        class="btn btn-warning text-white ml-auto"
+        (click)="restoreFacura()"
+      >
+        Restaurar Factura
+      </button>
+      <h5 class="card-header">
+        Informacion de facturas de clientes ({{ facturas.length }})
+      </h5>
+      <div class="card-body">
+        <div
+          *ngIf="facturas.length === 0"
+          class="alert alert-primary"
+          role="alert"
+        >
+          No se encontraron facturas con la busqueda.
+          <a routerLink="/contable/facturas">Regresar a la pagina principal</a>
+        </div>
+        <div *ngIf="cargando" class="row animated fadeIn fast">
+          <div class="col-12">
+            <div class="alert alert-info text-center" role="alert">
+              <h4 class="alert-heading">Cargando</h4>
+              <i class="fas fa-sync fa-spin fa-refresh fa-2x"></i>
+              <p>Por favor espere</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!cargando" class="table-responsive">
+          <table class="table table-striped table-bordered first">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>No. Factura</th>
+                <th>Cliente</th>
+                <th>Local</th>
+                <th>Fecha De Factura</th>
+                <th>Pagado</th>
+                <th>Abono</th>
+                <th>Ver Factura</th>
+                <th>Ajustes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let factura of facturas">
+                <td>{{ factura.id }}</td>
+                <td>{{ factura.facture_number }}</td>
+                <td>
+                  {{ factura.client_name }} {{ factura.client_last_name }}
+                </td>
+                <td>{{ factura.place_name }}</td>
+                <th>
+                  {{
+                    factura.facture_date | amLocale: "es" | amDateFormat: "LL"
+                  }}
+                </th>
+                <th>
+                  <button
+                    [disabled]="factura.total_to_pay === factura.total_paid"
+                    (click)="pagarFactura(factura.id)"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Marca Como Pagado"
+                    class="btn"
+                    [ngClass]="
+                      factura.total_to_pay === factura.total_paid
+                        ? 'btn-success'
+                        : 'btn-danger'
+                    "
+                  >
+                    {{
+                      factura.total_to_pay === factura.total_paid
+                        ? "Pagado"
+                        : "No Pagado"
+                    }}
+                  </button>
+                </th>
+                <th>
+                  <div class="row">
+                    <div class="col-6">
+                      <button
+                        [disabled]="factura.total_to_pay === factura.total_paid"
+                        [routerLink]="['/contable/abono', factura.id]"
+                        class="btn btn-sm btn-secondary"
+                      >
+                        Crear Abonos
+                      </button>
+                    </div>
+                  </div>
+                </th>
+                <th>
+                  <a
+                    [routerLink]="['/imprimir', factura.id]"
+                    class="btn btn-block btn-sm btn-info mr-2 mb-sm-0 mb-2 text-white"
+                  >
+                    <i class="fas fa-file-alt"></i
+                  ></a>
+                </th>
+                <th>
+                  <button
+                    (click)="deleteFacture(factura.id)"
+                    class="btn btn-sm btn-danger"
+                  >
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <nav class="mt-4" aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <button
+                [disabled]="
+                  facturas.length === 0 || (page === 1 && pageSeach === 1)
+                "
+                class="page-link cursor"
+                (click)="cambioPagina(-1)"
+              >
+                Anterior
+              </button>
+            </li>
+            <li
+              class="page-item"
+              routerLinkActive="active"
+              *ngFor="let contado of contador; let i = index"
+            >
+              <a
+                *ngIf="!existeSearch"
+                class="page-link"
+                [routerLink]="['/contable/facturas']"
+                [queryParams]="{ q: contado }"
+                >{{ contado }}</a
+              >
+            </li>
+            <li class="page-item">
+              <button
+                [disabled]="
+                  nextDisabled || facturas.length === 0 || nextDisabledSearch
+                "
+                class="page-link cursor"
+                (click)="cambioPagina(1)"
+              >
+                Siguiente
+              </button>
+            </li>
+          </ul>
+        </nav>
+        <p *ngIf="existeSearch">
+          Pagina: {{ pageSeach }} - {{ contador.length }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- end basic table  -->
+  <!-- ============================================================== -->
+</div>
