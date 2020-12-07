@@ -52,7 +52,7 @@ export class LoginComponent implements OnDestroy {
         this._router.navigate(['/contable/user'], { replaceUrl: true });
         this.loading = false;
       },
-      () => {
+      (resp) => {
         this.toastr.error(
           'Usuario y/o Contrasela invalido!!',
           'Credenciales Incorretas!!'

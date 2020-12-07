@@ -13,9 +13,16 @@
               <div class="card">
                 <div class="card-header">
                   <h5>Cambiar usuario y/o contraseña</h5>
-                <p>Nota: Recuerde que si solo va a cambiar el nombre de usuario la contraseña se puede dejar vacia, y si solo va a cambiar la contraseña puede dejar el nombre de usuario vacio</p>
+                  <p>
+                    Nota: Recuerde que si solo va a cambiar el nombre de usuario
+                    la contraseña se puede dejar vacia, y si solo va a cambiar
+                    la contraseña puede dejar el nombre de usuario vacio
+                  </p>
 
-                <h4>RECUERDE CUANDO LE DES EN GUARDAR LA PAGINA CERRARA SESION Y TIENE QUE INGRESAR NUEVAMENTE</h4>
+                  <h4>
+                    RECUERDE CUANDO LE DES EN GUARDAR LA PAGINA CERRARA SESION Y
+                    TIENE QUE INGRESAR NUEVAMENTE
+                  </h4>
                 </div>
                 <div class="card-body">
                   <!-- <div *ngIf="error" class="alert alert-danger" role="alert">
@@ -49,9 +56,208 @@
                       />
                     </div>
 
-                    <button [disabled]="loading" class="btn btn-primary btn-block">
+                    <button
+                      [disabled]="loading"
+                      class="btn btn-primary btn-block"
+                    >
                       Guardar
-                      <i *ngIf="loading" class="fas fa-sync fa-spin fa-refresh fa-2x"></i>
+                      <i
+                        *ngIf="loading"
+                        class="fas fa-sync fa-spin fa-refresh fa-2x"
+                      ></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <h2 class="pageheader-title">Cambiar contraseña admin de factura</h2>
+
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <div class="card-body">
+                  <!-- <div *ngIf="error" class="alert alert-danger" role="alert">
+                    No se encontro ningun local
+                  </div> -->
+                  <form
+                    autocomplete="off"
+                    [formGroup]="passwordForma"
+                    (ngSubmit)="cambiarContrasena()"
+                  >
+                    <div class="form-group">
+                      <h3 (click)="mostrar()">
+                        {{
+                          mostrarPass
+                            ? "Mostrar Contraseña"
+                            : "Ocultar Contraseña"
+                        }}
+                      </h3>
+                    </div>
+                    <div class="form-group">
+                      <label for="changePass" class="col-form-label"
+                        >Contraseña Actual</label
+                      >
+                      <input
+                        id="changePass"
+                        formControlName="changePass"
+                        [type]="mostrarPass ? 'password' : 'text'"
+                        class="form-control"
+                        [class.is-invalid]="
+                          passwordForma.get('changePass').invalid &&
+                          passwordForma.get('changePass').touched
+                        "
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="col-form-label"
+                        >Contraseña nueva</label
+                      >
+                      <input
+                        id="password"
+                        formControlName="password"
+                        [type]="mostrarPass ? 'password' : 'text'"
+                        class="form-control"
+                        [class.is-invalid]="pass1NoValido"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="password2" class="col-form-label"
+                        >Repetir Contraseña</label
+                      >
+                      <input
+                        id="password2"
+                        formControlName="password2"
+                        [type]="mostrarPass ? 'password' : 'text'"
+                        class="form-control"
+                        [class.is-invalid]="pass2NoValido"
+                      />
+                    </div>
+
+                    <button
+                      [disabled]="passwordForma.invalid"
+                      class="btn btn-primary btn-block"
+                    >
+                      Cambiar
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end Create   -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-xl-10">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header" id="top">
+          <h2 class="pageheader-title">
+            Cambiar contraseña empleado de factura
+          </h2>
+
+          <!-- ============================================================== -->
+          <!--  Create User  -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                <div class="card-body">
+                  <!-- <div *ngIf="error" class="alert alert-danger" role="alert">
+                    No se encontro ningun local
+                  </div> -->
+                  <form
+                    autocomplete="off"
+                    [formGroup]="passwordForma2"
+                    (ngSubmit)="cambiarContrasena2()"
+                  >
+                    <div class="form-group">
+                      <h3 (click)="mostrar()">
+                        Mostrar Contraseña/Ocultar Contraseña
+                      </h3>
+                    </div>
+                    <div class="form-group">
+                      <label for="changePass" class="col-form-label"
+                        >Contraseña Actual</label
+                      >
+                      <input
+                        id="changePass"
+                        formControlName="changePass"
+                        [type]="mostrarPass ? 'password' : 'text'"
+                        class="form-control"
+                        [class.is-invalid]="
+                          passwordForma2.get('changePass').invalid &&
+                          passwordForma2.get('changePass').touched
+                        "
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="admin" class="col-form-label"
+                        >Contraseña Admin</label
+                      >
+                      <input
+                        id="admin"
+                        formControlName="admin"
+                        [type]="mostrarPass ? 'password' : 'text'"
+                        class="form-control"
+                        [class.is-invalid]="
+                          passwordForma2.get('admin').invalid &&
+                          passwordForma2.get('admin').touched
+                        "
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="col-form-label"
+                        >Contraseña nueva</label
+                      >
+                      <input
+                        id="password"
+                        formControlName="password"
+                        [type]="mostrarPass ? 'password' : 'text'"
+                        class="form-control"
+                        [class.is-invalid]="pass1NoValido2"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="password2" class="col-form-label"
+                        >Repetir Contraseña</label
+                      >
+                      <input
+                        id="password2"
+                        formControlName="password2"
+                        [type]="mostrarPass ? 'password' : 'text'"
+                        class="form-control"
+                        [class.is-invalid]="pass2NoValido2"
+                      />
+                    </div>
+
+                    <button
+                      [disabled]="passwordForma2.invalid"
+                      class="btn btn-primary btn-block"
+                    >
+                      Cambiar
                     </button>
                   </form>
                 </div>

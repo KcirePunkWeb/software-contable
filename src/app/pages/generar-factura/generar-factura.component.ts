@@ -54,9 +54,9 @@ export class GenerarFacturaComponent implements OnDestroy {
       administration_price: ['', Validators.required],
       water_service_price: ['', Validators.required],
       energy_service_price: ['', Validators.required],
-      administration_vat: ['', Validators.required],
-      water_service_vat: ['', Validators.required],
-      energy_service_vat: ['', Validators.required],
+      administration_vat: ['0', Validators.required],
+      water_service_vat: ['0', Validators.required],
+      energy_service_vat: ['0', Validators.required],
       facture_date: [new Date(), Validators.required],
       way_to_pay: ['efectivo'],
     });
@@ -111,7 +111,12 @@ export class GenerarFacturaComponent implements OnDestroy {
       this.value('energy_service_price')
     );
 
-    this.total = this.dataFactura.price + administracion + agua + luz;
+    const placeVat = this.calcularPorcentaje(
+      this.dataFactura.vat,
+      this.dataFactura.price
+    );
+
+    this.total = placeVat + administracion + agua + luz;
     this.price_humanized.setValue(NumeroALetras(this.total));
 
     this.totalEscrito = true;

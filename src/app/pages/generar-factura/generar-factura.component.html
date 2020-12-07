@@ -59,6 +59,7 @@
                           >IVA - Administracion</label
                         >
                         <select
+                          disabled
                           id="administration_vat"
                           formControlName="administration_vat"
                           class="form-control"
@@ -102,6 +103,7 @@
                           >IVA - Cuota de agua</label
                         >
                         <select
+                          disabled
                           id="water_service_vat"
                           formControlName="water_service_vat"
                           class="form-control"
@@ -146,6 +148,7 @@
                           >IVA - Cuota De Electricidad</label
                         >
                         <select
+                          disabled
                           id="energy_service_vat"
                           formControlName="energy_service_vat"
                           class="form-control"
@@ -198,9 +201,7 @@
                       {{ total | currency: "COP":"symbol-narrow":".0-0" }}
                     </h2>
 
-                    <p>
-                      Verificar si esta bien escrito el total en letras
-                    </p>
+                    <p>Verificar si esta bien escrito el total en letras</p>
                     <textarea
                       [formControl]="price_humanized"
                       class="form-control"

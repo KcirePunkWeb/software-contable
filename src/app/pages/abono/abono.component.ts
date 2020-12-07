@@ -100,7 +100,12 @@ export class AbonoComponent implements OnInit, OnDestroy {
           resp.energy_service_price
         );
 
-        this.total_to_pay = resp.place_price + administracion + agua + luz;
+        this.total_to_pay =
+          resp.place_price +
+          resp.place_price * 0.19 +
+          administracion +
+          agua +
+          luz;
         this.total_paid = resp.total_paid;
         this.nombre.setValue(resp.client_name + ' ' + resp.client_last_name);
       });

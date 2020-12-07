@@ -47,6 +47,7 @@ export class ImprimirAbonoComponent implements OnInit, OnDestroy {
         .getAbonoById(this.token, resp['id'])
         .subscribe((resp) => {
           this.Factura = resp.facture;
+
           this.total_to_pay = resp.total_to_pay;
           this.calcularPrecios();
           this.cargando = false;
@@ -111,9 +112,10 @@ export class ImprimirAbonoComponent implements OnInit, OnDestroy {
       this.Factura.water_service_price +
       this.Factura.energy_service_price;
 
-    this.total_vat = administracion_vat + agua_vat + luz_vat;
+    this.total_vat = this.Factura.place_price * 0.19;
 
-    this.total = this.Factura.place_price + administracion + agua + luz;
+    this.total =
+      this.Factura.place_price + this.total_vat + administracion + agua + luz;
   }
 
   generarPDF() {

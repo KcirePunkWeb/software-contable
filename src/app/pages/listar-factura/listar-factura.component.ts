@@ -1,3 +1,4 @@
+import { PasswordService } from './../../services/password.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FacturaService } from '@services/factura.service';
 import { UserService } from '@services/user.service';
@@ -30,7 +31,8 @@ export class ListarFacturaComponent implements OnInit, OnDestroy {
     private _usService: UserService,
     private toastr: ToastrService,
     private _activateRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _passwordService: PasswordService
   ) {
     this.token = this._usService.getToken;
     this.search();
@@ -112,7 +114,7 @@ export class ListarFacturaComponent implements OnInit, OnDestroy {
   cambioPagina(valor: number) {
     if (!this.existeSearch) {
       this._router.navigate(['/contable/facturas'], {
-        queryParams: { q: this.page += valor },
+        queryParams: { q: (this.page += valor) },
       });
       if (this.page < 1) {
         this._router.navigate(['/contable/facturas'], {
@@ -120,14 +122,14 @@ export class ListarFacturaComponent implements OnInit, OnDestroy {
         });
       } else if (this.page > this.totalPage) {
         this._router.navigate(['/contable/facturas'], {
-          queryParams: { q: this.page -= valor },
+          queryParams: { q: (this.page -= valor) },
         });
       }
     } else {
       this._router.navigate(['/contable/facturas'], {
         queryParams: {
           search: this.searchClientesValue,
-          page: this.pageSeach += valor,
+          page: (this.pageSeach += valor),
         },
       });
       if (this.pageSeach < 1) {
@@ -138,7 +140,7 @@ export class ListarFacturaComponent implements OnInit, OnDestroy {
         this._router.navigate(['/contable/facturas'], {
           queryParams: {
             search: this.searchClientesValue,
-            page: this.pageSeach -= valor,
+            page: (this.pageSeach -= valor),
           },
         });
       }
@@ -169,17 +171,22 @@ export class ListarFacturaComponent implements OnInit, OnDestroy {
 
   deleteFacture(id: string) {
     Swal.fire({
-      title: '¿Estas seguro que deseas eliminar esta factura?',
-      icon: 'warning',
+      title: 'Escriba la contraseña para borrar factura',
+      input: 'password',
+      inputAttributes: {
+        autocapitalize: 'off',
+      },
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si!',
-    }).then((result) => {
-      if (result.value) {
-        return this._facturaService
-          .deleteFactura(id, this.token)
-          .subscribe(() => {
+      confirmButtonText: 'Borrar',
+      showLoaderOnConfirm: true,
+      preConfirm: async (login) => {
+        // Swal.fire('Contraseña incorrecta', '', 'error');
+        const resp = await this._passwordService.getPassword();
+
+        const { clave, clave_empleado } = await resp.data();
+
+        if (clave === login || clave_empleado === login) {
+          this._facturaService.deleteFactura(id, this.token).subscribe(() => {
             this._router.navigate(['/contable/facturas'], {
               queryParams: {
                 q: 1,
@@ -188,8 +195,34 @@ export class ListarFacturaComponent implements OnInit, OnDestroy {
             this.getFacturas();
             this.toastr.success('Borrado!!', 'Factura eliminado correctamente');
           });
-      }
-    });
+        } else {
+          Swal.fire('Contraseña incorrecta', '', 'error');
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {});
+    // Swal.fire({
+    //   title: '¿Estas seguro que deseas eliminar esta factura?',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Si!',
+    // }).then((result) => {
+    //   if (result.value) {
+    //     return this._facturaService
+    //       .deleteFactura(id, this.token)
+    //       .subscribe(() => {
+    //         this._router.navigate(['/contable/facturas'], {
+    //           queryParams: {
+    //             q: 1,
+    //           },
+    //         });
+    //         this.getFacturas();
+    //         this.toastr.success('Borrado!!', 'Factura eliminado correctamente');
+    //       });
+    //   }
+    // });
   }
 
   restoreFacura() {

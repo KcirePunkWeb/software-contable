@@ -26,7 +26,7 @@
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
     <div class="card">
       <button
-        style="position: absolute; right: 0;"
+        style="position: absolute; right: 0"
         class="btn btn-warning text-white ml-auto"
         (click)="restoreClient()"
       >
@@ -59,6 +59,7 @@
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>NIT o C.C</th>
+                <th>Empresa</th>
                 <th>Telefono</th>
                 <th>Ciudad</th>
                 <th>Barrio</th>
@@ -72,6 +73,7 @@
                 <td>{{ client.name }}</td>
                 <td>{{ client.last_name }}</td>
                 <td>{{ client.document_number }}</td>
+                <td>{{ client.enterprise_name || "Sin empresa" }}</td>
                 <td>{{ client.phone_number }}</td>
                 <td>{{ client.city }}</td>
                 <td>{{ client.neighborhood }}</td>

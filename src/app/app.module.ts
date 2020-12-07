@@ -16,6 +16,11 @@ import { RegisterComponent } from './SignInSignUp/register/register.component';
 import { ImprimirComponent } from './imprimir/imprimir.component';
 import { ImprimirAbonoComponent } from './imprimir-abono/imprimir-abono.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { environment } from './../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +37,8 @@ import { ImprimirAbonoComponent } from './imprimir-abono/imprimir-abono.componen
     PagesModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     ToastrModule.forRoot({
       closeButton: true,
       timeOut: 5000,

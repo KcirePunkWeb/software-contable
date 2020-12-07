@@ -85,15 +85,20 @@ export class ImprimirComponent implements OnInit, OnDestroy {
       true
     );
 
+    const placeVat = this.calcularTotal(
+      this.Factura.place_vat,
+      this.Factura.place_price
+    );
+
     this.total_notIva =
       this.Factura.place_price +
       this.Factura.administration_price +
       this.Factura.water_service_price +
       this.Factura.energy_service_price;
 
-    this.total_vat = administracion_vat + agua_vat + luz_vat;
+    this.total_vat = this.Factura.place_price * 0.19;
 
-    this.total = this.Factura.place_price + administracion + agua + luz;
+    this.total = placeVat + administracion + agua + luz;
   }
 
   generarPDF() {

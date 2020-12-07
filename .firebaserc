@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "contable-df981"
+  },
+  "targets": {
+    "password-305fa": {
+      "hosting": {
+        "sotfware-contable": [
+          "password-305fa"
+        ]
+      }
+    }
   }
 }
